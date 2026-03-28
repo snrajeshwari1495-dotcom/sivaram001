@@ -1,0 +1,152 @@
+1)
+import java.util.Scanner;
+public class Solution {
+    public static long sumOfMultiples(long n, int k) {
+        long m = (n - 1) / k;
+        return k * m * (m + 1) / 2;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            long n = sc.nextLong();
+            long sum3 = sumOfMultiples(n, 3);
+            long sum5 = sumOfMultiples(n, 5);
+            long sum15 = sumOfMultiples(n, 15);
+            long result = sum3 + sum5 - sum15;
+            System.out.println(result);
+        }
+    }
+}
+
+
+
+
+2)
+import java.util.Scanner;
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            long n = sc.nextLong();
+            long a = 1, b = 2;
+            long sum = 0;
+            while (a <= n) {
+                if (a % 2 == 0) {
+                    sum += a;
+                }
+
+                long next = a + b;
+                a = b;
+                b = next;
+            }
+
+            System.out.println(sum);
+        }
+    }
+}
+
+
+
+3)
+import java.util.Scanner;
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt(); 
+        while (t-- > 0) {
+            long n = sc.nextLong();
+            long maxPrime = -1;
+            while (n % 2 == 0) {
+                maxPrime = 2;
+                n = n / 2;
+            }
+            for (long i = 3; i * i <= n; i += 2) {
+                while (n % i == 0) {
+                    maxPrime = i;
+                    n = n / i;
+                }
+            }
+            if (n > 2) {
+                maxPrime = n;
+            }
+
+            System.out.println(maxPrime);
+        }
+    }
+}
+
+
+
+
+4)
+import java.util.Scanner;
+public class Solution {
+    public static boolean isPalindrome(int num) {
+        int original = num;
+        int reverse = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            reverse = reverse * 10 + digit;
+            num /= 10;
+        }
+
+        return original == reverse;
+    }
+public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+         while (t-- > 0) {
+            int n = sc.nextInt();
+            int maxPalindrome = 0;
+             for (int i = 999; i >= 100; i--) {
+                for (int j = i; j >= 100; j--) {
+
+                    int product = i * j;
+                    if (product < n && isPalindrome(product)) {
+                        if (product > maxPalindrome) {
+                            maxPalindrome = product;
+                        }
+                    }
+                }
+            }
+
+            System.out.println(maxPalindrome);
+        }
+    }
+}
+
+
+
+
+5)
+import java.util.Scanner;
+public class Solution {
+    public static long gcd(long a, long b) {
+        while (b != 0) {
+            long temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+    public static long lcm(long a, long b) {
+        return (a * b) / gcd(a, b);
+    }
+     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+
+            long result = 1;
+             for (int i = 1; i <= n; i++) {
+                result = lcm(result, i);
+            }
+
+            System.out.println(result);
+        }
+    }
+}
